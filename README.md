@@ -49,13 +49,13 @@ Building OpenSeesPy
 5. Install Anaconda with Python X.X, doing one of the following:
    - Install Anaconda in `C:\Program Files\Anaconda3`
    - Point the OpenSeesPy project to your installation of Anaconda:
-     - OpenSeesPy → Properties → Linker → General → Additional Library Directories → `(Anaconda Path)\libs`
-     - OpenSeesPy → Properties → C/C++ → General → Additional Include Directories → `(Anaconda Path)\include`
+     - OpenSeesPy → Properties → Linker → General → Additional Library Directories → `%PATH_TO_ANACONDA%\libs`
+     - OpenSeesPy → Properties → C/C++ → General → Additional Include Directories → `%PATH_TO_ANACONDA%\include`
 6. Install Tcl, doing one of the following (yes you do still need it):
    - Install a Tcl distribution for Windows at `C:\Program Files\Tcl`
-   - Point *each project that needs it* (why is this not centralized???) to Anaconda's "general" `include` and `lib` directories instead (Anaconda ships Tcl by default). Note that these are *not* the same as the directories in step 5. If the Linker section isn't available, just do the `include` directory.
-     - $Project → Properties → Linker → General → Additional Library Directories → `(Anaconda Path)\Library\lib`
-     - $Project → Properties → C/C++ → General → Additional Include Directories → `(Anaconda Path)\Library\include`
+   - Point *each project that needs it* (why is this not centralized???) to where you've installed Tcl
+     - $Project → Properties → Linker → General → Additional Library Directories → `%PATH_TO_TCL%\Library\lib`
+     - $Project → Properties → C/C++ → General → Additional Include Directories → `%PATH_TO_TCL%\Library\include`
 7. Extract any missing libraries from `OpenSeesLib.zip` into `OpenSees\Win64\lib\release` (some are already present in the repository)
 8. Build the OpenSeesPy project!
-9. Copy `opensees.pyd` from `OpenSees\Win64\bin\release` to your Anaconda `site-packages` directory [`(Anaconda Path)\lib\site-packages`] to make it importable from anywhere.
+9. Copy `opensees.pyd` from `OpenSees\Win64\bin\release` to your Anaconda `site-packages` directory (`%PATH_TO_ANACONDA%\lib\site-packages`) to make it importable from anywhere.
