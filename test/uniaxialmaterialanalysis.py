@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import dataclasses
 import logging
 import pathlib
 import tempfile
@@ -12,6 +13,7 @@ __all__ = [
     'UniaxialMaterialAnalysis',
 ]
 
+
 #===============================================================================
 # Uniaxial material analysis
 #===============================================================================
@@ -23,33 +25,28 @@ class OpenSeesAnalysis():
         self.deleteFiles = True
 
 
+@dataclasses.dataclass
 class UniaxialMaterialAnalysis(OpenSeesAnalysis):
-    def __init__(
-            self,
-            materialFactory: t.FunctionType,
-            scratchPath=None,
-            analysisID=None,
-            test: str = 'NormUnbalance',
-            test_tolerance: float = 1e-8,
-            test_maxiters: int = 10,
-            algorithm: str = 'Newton',
-            constraints: str = 'Transformation',
-            system: str = 'UmfPack',
-            numberer: str = 'RCM',
-        ):
-        self.materialFactory = materialFactory
-        super().__init__(scratchPath=scratchPath, analysisID=analysisID)
+    """Uniaxial material tester.
 
-        # Default settings, tweakable
-        self.test = test
-        self.test_tolerance = test_tolerance
-        self.test_maxiters = test_maxiters
-        self.algorithm = algorithm
+    Takes a function that, when called with zero arguments, creates the material
+    to be analyzed, and returns the integer tag of the material.
+    """
+    materialFactory: t.FunctionType
+    # Default settings, tweakable
+    test: str = 'NormUnbalance'
+    test_tolerance: float = 1e-8
+    test_maxiters: int = 10
+    test_pflag: int = 0
+    test_norm: int = 2
+    algorithm: str = 'Newton'
+    # Analysis settings that are tweakable, but probably don't need to be
+    constraints: str = 'Transformation'
+    system: str = 'UmfPack'
+    numberer: str = 'RCM'
 
-        # Analysis settings that are tweakable, but probably don't need to be
-        self.constraints = constraints
-        self.system = system
-        self.numberer = numberer
+    def __post_init__(self):
+        super().__init__()
 
     def runAnalysis(self,
                     peaks,
@@ -73,6 +70,10 @@ class UniaxialMaterialAnalysis(OpenSeesAnalysis):
         
         It is an error to specify both `numSteps` and `strainRate`. If neither
         are specified, no interpolation between points in `peaks` is performed.
+
+        Returns
+        -------
+        results : dict[str, np.ndarray]
         """
         # Check arguments
         if numSteps is not None and strainRate is not None:
@@ -119,11 +120,12 @@ class UniaxialMaterialAnalysis(OpenSeesAnalysis):
         #-------------------------------
         # Build and run the analysis
         #-------------------------------
-        ops.constraints('Transformation')
-        ops.numberer('RCM')
-        ops.system('UmfPack')
-        ops.test('NormUnbalance', 1e-8, 10)
-        ops.algorithm('Newton')
+        ops.constraints(self.constraints)
+        ops.numberer(self.numberer)
+        ops.system(self.system)
+        ops.test(self.test, self.test_tolerance, self.test_maxiters,
+                 self.test_pflag, self.test_norm)
+        ops.algorithm(self.algorithm)
         ops.integrator('LoadControl', 1)
         ops.analysis('Static')
 
