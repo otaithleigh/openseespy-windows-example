@@ -52,7 +52,7 @@ Building OpenSeesPy
      - OpenSeesPy → Properties → Linker → General → Additional Library Directories → `%PATH_TO_ANACONDA%\libs`
      - OpenSeesPy → Properties → C/C++ → General → Additional Include Directories → `%PATH_TO_ANACONDA%\include`
 6. Install Tcl, doing one of the following (yes you do still need it):
-   - Install a Tcl distribution for Windows at `C:\Program Files\Tcl`
+   - Install a Tcl distribution for Windows, such as [Magicsplat](https://www.magicsplat.com/tcl-installer/index.html) at `C:\Program Files\Tcl`
    - Point *each project that needs it* (why is this not centralized???) to where you've installed Tcl
      - $Project → Properties → Linker → General → Additional Library Directories → `%PATH_TO_TCL%\Library\lib`
      - $Project → Properties → C/C++ → General → Additional Include Directories → `%PATH_TO_TCL%\Library\include`
