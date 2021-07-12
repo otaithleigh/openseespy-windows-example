@@ -27,7 +27,6 @@ class UniaxialMaterialAnalysis(OpenSeesAnalysis):
     def __init__(
             self,
             materialFactory: t.FunctionType,
-            matTag: int = 1,
             scratchPath=None,
             analysisID=None,
             test: str = 'NormUnbalance',
@@ -39,7 +38,6 @@ class UniaxialMaterialAnalysis(OpenSeesAnalysis):
             numberer: str = 'RCM',
         ):
         self.materialFactory = materialFactory
-        self.matTag = matTag
         super().__init__(scratchPath=scratchPath, analysisID=analysisID)
 
         # Default settings, tweakable
@@ -109,8 +107,8 @@ class UniaxialMaterialAnalysis(OpenSeesAnalysis):
         ops.fix(1, 1)
 
         # Define Elements
-        self.materialFactory()
-        ops.element('Truss', 1, 1, 2, 1.0, self.matTag)
+        matTag = self.materialFactory()
+        ops.element('Truss', 1, 1, 2, 1.0, matTag)
 
         # Define Loads
         ops.timeSeries('Path', 854, '-dt', 1.0, '-values', *values, '-useLast',

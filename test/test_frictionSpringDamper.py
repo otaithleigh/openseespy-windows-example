@@ -10,6 +10,7 @@ from uniaxialmaterialanalysis import UniaxialMaterialAnalysis
 #===============================================================================
 def material():
     ops.uniaxialMaterial('frictionSpringDamper', 1, 1000, 50, 25, 60)
+    return 1
 
 
 analysis = UniaxialMaterialAnalysis(material)
