@@ -41,21 +41,33 @@ Adding the material
 Building OpenSeesPy
 -------------------
 
-1. Clone OpenSees repository, checkout latest stable(ish) tag (v3.3.0 at time of writing)
+1. Clone OpenSees repository, checkout latest stable(ish) tag (v3.3.0 at time of
+   writing)
 2. Open the solution (`OpenSees\Win64\OpenSees.sln`)
 3. Change build from `Debug.DLL` to `Release`
 4. Find the Python version OpenSeesPy expects (3.8 at time of writing):
-   - OpenSeesPy → Properties → Linker → Input → Additional Dependencies → pythonXX.lib
+   - OpenSeesPy → Properties → Linker → Input → Additional Dependencies →
+     pythonXX.lib
 5. Install Anaconda with Python X.X, doing one of the following:
    - Install Anaconda in `C:\Program Files\Anaconda3`
    - Point the OpenSeesPy project to your installation of Anaconda:
-     - OpenSeesPy → Properties → Linker → General → Additional Library Directories → `%PATH_TO_ANACONDA%\libs`
-     - OpenSeesPy → Properties → C/C++ → General → Additional Include Directories → `%PATH_TO_ANACONDA%\include`
+     - OpenSeesPy → Properties → Linker → General → Additional Library
+       Directories → `%PATH_TO_ANACONDA%\libs`
+     - OpenSeesPy → Properties → C/C++ → General → Additional Include
+       Directories → `%PATH_TO_ANACONDA%\include`
 6. Install Tcl, doing one of the following (yes you do still need it):
-   - Install a Tcl distribution for Windows, such as [Magicsplat](https://www.magicsplat.com/tcl-installer/index.html) at `C:\Program Files\Tcl`
-   - Point *each project that needs it* (why is this not centralized???) to where you've installed Tcl
-     - $Project → Properties → Linker → General → Additional Library Directories → `%PATH_TO_TCL%\Library\lib`
-     - $Project → Properties → C/C++ → General → Additional Include Directories → `%PATH_TO_TCL%\Library\include`
-7. Extract any missing libraries from `OpenSeesLib.zip` into `OpenSees\Win64\lib\release` (some are already present in the repository)
+   - Install a Tcl distribution for Windows, such as
+     [Magicsplat](https://www.magicsplat.com/tcl-installer/index.html) at
+     `C:\Program Files\Tcl`
+   - Point *each project that needs it* (why is this not centralized???) to
+     where you've installed Tcl
+     - $Project → Properties → Linker → General → Additional Library Directories
+       → `%PATH_TO_TCL%\Library\lib`
+     - $Project → Properties → C/C++ → General → Additional Include Directories
+       → `%PATH_TO_TCL%\Library\include`
+7. Extract any missing libraries from `OpenSeesLib.zip` into
+   `OpenSees\Win64\lib\release` (some are already present in the repository)
 8. Build the OpenSeesPy project!
-9. Copy `opensees.pyd` from `OpenSees\Win64\bin\release` to your Anaconda `site-packages` directory (`%PATH_TO_ANACONDA%\lib\site-packages`) to make it importable from anywhere.
+9. Copy `opensees.pyd` from `OpenSees\Win64\bin\release` to your Anaconda
+   `site-packages` directory (`%PATH_TO_ANACONDA%\lib\site-packages`) to make it
+   importable from anywhere.
