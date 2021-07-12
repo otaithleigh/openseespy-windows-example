@@ -32,7 +32,7 @@ class UniaxialMaterialAnalysis(OpenSeesAnalysis):
     Takes a function that, when called with zero arguments, creates the material
     to be analyzed, and returns the integer tag of the material.
     """
-    materialFactory: t.FunctionType
+    materialFactory: t.Callable[[], int]
     # Default settings, tweakable
     test: str = 'NormUnbalance'
     test_tolerance: float = 1e-8
