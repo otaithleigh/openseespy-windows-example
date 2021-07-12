@@ -62,9 +62,9 @@ Building OpenSeesPy
    - Point *each project that needs it* (why is this not centralized???) to
      where you've installed Tcl
      - $Project → Properties → Linker → General → Additional Library Directories
-       → `%PATH_TO_TCL%\Library\lib`
+       → `%PATH_TO_TCL%\lib`
      - $Project → Properties → C/C++ → General → Additional Include Directories
-       → `%PATH_TO_TCL%\Library\include`
+       → `%PATH_TO_TCL%\include`
 7. Extract any missing libraries from `OpenSeesLib.zip` into
    `OpenSees\Win64\lib\release` (some are already present in the repository)
 8. Build the OpenSeesPy project!
