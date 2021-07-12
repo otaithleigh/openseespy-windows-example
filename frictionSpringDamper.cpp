@@ -43,22 +43,13 @@
 #include <math.h>
 #include <float.h>
 
-
-#ifdef _USRDLL
-#define OPS_Export extern "C" _declspec(dllexport)
-#elif _MACOSX
-#define OPS_Export extern "C" __attribute__((visibility("default")))
-#else
-#define OPS_Export extern "C"
-#endif
-
-OPS_Export void
+void
 localInit()
 {
   OPS_Error("frictionSpringDamper unaxial material \nWritten by Mark D. Denavit, University of Tennessee, Knoxville\n", 1);
 }
 
-OPS_Export void *
+void *
 OPS_frictionSpringDamper()
 {
   // Pointer to a uniaxial material that will be returned
