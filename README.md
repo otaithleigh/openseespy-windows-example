@@ -67,7 +67,9 @@ Building OpenSeesPy
        → `%PATH_TO_TCL%\include`
 7. Extract any missing libraries from `OpenSeesLib.zip` into
    `OpenSees\Win64\lib\release` (some are already present in the repository)
-8. Build the OpenSeesPy project!
-9. Copy `opensees.pyd` from `OpenSees\Win64\bin\release` to your Anaconda
+8. Make sure that the tcl project is marked as a dependency of OpenSeesPy:
+   - OpenSeesPy → Build Dependencies → Project Dependencies → Depends on → tcl
+9.  Build the OpenSeesPy project!
+10. Copy `opensees.pyd` from `OpenSees\Win64\bin\release` to your Anaconda
    `site-packages` directory (`%PATH_TO_ANACONDA%\lib\site-packages`) to make it
    importable from anywhere.
